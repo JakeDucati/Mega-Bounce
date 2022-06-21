@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        count = 0;
+        count = PlayerPrefs.GetInt("CubesCollected",0);
         SetCountText();
     }
 
@@ -27,8 +27,9 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    void SetCountText()
+    public void SetCountText()
     {
+        count = PlayerPrefs.GetInt("CubesCollected", 0);
         countText.text = "Cubes Collected: " + count.ToString();//change orange count to Level to have level num displayed
     }
 
@@ -41,8 +42,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<PickupManager>().HideCube();
             count = count + 1;
+            PlayerPrefs.SetInt("CubesCollected", count);
             SetCountText();
         }
     }

@@ -46,10 +46,19 @@ public class PlayerManager : MonoBehaviour
             print("Level: " + level);
         }
     }
+    public static List<GameObject> pickupList = new List<GameObject>();
     public void ResetLevel()
     {
+        foreach(GameObject g in pickupList)
+        {
+            print(g.name);
+            PlayerPrefs.SetInt(g.name, 1);
+            g.SetActive(true);
+        }
         level = 1;
         PlayerPrefs.SetInt("PlayerLevel", level);
+        PlayerPrefs.SetInt("CubesCollected",0);
+        gameObject.GetComponent<PlayerController>().SetCountText();
         Respawn();
     }
 }
