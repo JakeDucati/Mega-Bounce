@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public void SetCountText()
     {
         count = PlayerPrefs.GetInt("CubesCollected", 0);
-        countText.text = "Cubes Collected: " + count.ToString();//change orange count to Level to have level num displayed
+        countText.text = "Cubes Collected: " + count.ToString();
     }
 
     void FixedUpdate()
