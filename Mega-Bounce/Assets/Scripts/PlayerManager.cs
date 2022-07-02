@@ -6,14 +6,12 @@ using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     public TMP_Text LevelCount;
-    // Start is called before the first frame update
     void Start()
     {
         level = PlayerPrefs.GetInt("PlayerLevel",1);
         Respawn();
     }
 
-    // Update is called once per frame
     void Update()
     {
         LevelCount.text = "Level: " + level;
@@ -58,7 +56,9 @@ public class PlayerManager : MonoBehaviour
         level = 1;
         PlayerPrefs.SetInt("PlayerLevel", level);
         PlayerPrefs.SetInt("CubesCollected",0);
-        gameObject.GetComponent<PlayerController>().SetCountText();
+        PlayerPrefs.SetFloat("energy",5f);
+        gameObject.GetComponent<Movement>().SetCountText();
+        gameObject.GetComponent<Movement>().OnReset();
         Respawn();
     }
 }

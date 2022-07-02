@@ -8,11 +8,19 @@ public class Movement : MonoBehaviour
 {
     private int count;
     public TextMeshProUGUI countText;
+    public float energy;
+    public float maxEnergy = 10f;
     void Start()
     {
         count = PlayerPrefs.GetInt("CubesCollected", 0);
+        energy = PlayerPrefs.GetFloat("energy",5f);
         SetCountText();
         readyToJump = true;
+    }
+    public void OnReset()
+    {
+        energy = 5;
+        count = 0;
     }
     public void SetCountText()
     {
@@ -82,7 +90,9 @@ public class Movement : MonoBehaviour
         {
             other.gameObject.GetComponent<PickupManager>().HideCube();
             count = count + 1;
+            energy = Mathf.Clamp(energy + 1,0,maxEnergy);
             PlayerPrefs.SetInt("CubesCollected", count);
+            PlayerPrefs.SetFloat("energy", energy);
             SetCountText();
         }
     }
