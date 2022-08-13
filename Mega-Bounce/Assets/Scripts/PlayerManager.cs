@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     {
         level = PlayerPrefs.GetInt("PlayerLevel",1);
         Respawn();
+        menuPanel.SetActive(false);
     }
 
     void Update()
@@ -17,7 +18,26 @@ public class PlayerManager : MonoBehaviour
         LevelCount.text = "Level: " + level;
         CheckDeath();
         CheckLevel();
+        PauseMenu();
     }
+    public GameObject menuPanel;
+    void PauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menuPanel.activeSelf)
+            {
+                menuPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                menuPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+    }
+
     Vector3 spawnPos = new Vector3(0, 2, 0);
     int level = 1;
     int distanceBetweenSpawnpoints = 40;

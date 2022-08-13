@@ -68,19 +68,28 @@ public class Movement : MonoBehaviour
     public Transform orientation;
     public Rigidbody rb;
     public float moveSpeed;
+    private float sprintMultiplier = 1;
     public float jumpForce;
     bool readyToJump;
     private void MovePlayer()
     {
+        if (Input.GetKey(KeyCode.LeftShift) && energy > 0 && !(verticalInput == 0 && horizontalInput == 0)) {
+            sprintMultiplier = 2.3f;
+            energy = Mathf.Clamp(energy - 0.02f, 0, maxEnergy);
+        }
+        else
+        {
+            sprintMultiplier = 1;
+        }
         Vector3 moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * moveSpeed * sprintMultiplier * 10, ForceMode.Force);
     }
     private void LimitSpeed()
     {
         Vector3 limitedVelocity = new Vector3(rb.velocity.x,0,rb.velocity.z);
-        if (limitedVelocity.magnitude > moveSpeed)
+        if (limitedVelocity.magnitude > moveSpeed * sprintMultiplier)
         {
-            Vector3 limitedVel = limitedVelocity.normalized * moveSpeed;
+            Vector3 limitedVel = limitedVelocity.normalized * moveSpeed * sprintMultiplier;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
