@@ -39,6 +39,26 @@ public class CameraController : MonoBehaviour
             xAxis = Input.GetAxis("Mouse X");
             yAxis = Input.GetAxis("Mouse Y");
         }
+
+        if (_targetZoom < 1)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            if (!mouseDown)
+            {
+                mouseDown = true;
+                xAxis = Input.GetAxis("Mouse X");
+                yAxis = Input.GetAxis("Mouse Y");
+            }
+            else
+            {
+                mouseDown = true;
+            }
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         if (mouseDown)
         {
             p = yAxis * -PitchSensitivity;

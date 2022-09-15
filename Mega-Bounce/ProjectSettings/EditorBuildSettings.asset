@@ -5,11 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Template/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/Scenes/MiniGame.unity
+    path: Assets/Scenes/Start Screen.unity
+    guid: 3136b7eae3a21044eb160d866bb89057
+  - enabled: 1
+    path: Assets/Scenes/Mega-Bounce-Game.unity
     guid: 5befb65c624ec414993f43a2f63eb691
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 0f8ec938a94ebdf46940026da97dea65, type: 2}

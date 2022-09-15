@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickupManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         PlayerManager.pickupList.Add(gameObject);

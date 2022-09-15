@@ -73,7 +73,7 @@ public class Movement : MonoBehaviour
     bool readyToJump;
     private void MovePlayer()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && energy > 0 && !(verticalInput == 0 && horizontalInput == 0)) {
+        if (Input.GetKey(MenuManager.keys["Sprint"]) && energy > 0 && !(verticalInput == 0 && horizontalInput == 0)) {
             sprintMultiplier = 2.3f;
             energy = Mathf.Clamp(energy - 0.02f, 0, maxEnergy);
         }

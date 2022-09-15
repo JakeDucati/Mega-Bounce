@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
     public TMP_Text LevelCount;
     void Start()
     {
-        level = PlayerPrefs.GetInt("PlayerLevel",1);
+        level = PlayerPrefs.GetInt("PlayerLevel", 1);
         Respawn();
         menuPanel.SetActive(false);
     }
@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject menuPanel;
     void PauseMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(MenuManager.keys["Menu"]))
         {
             if (menuPanel.activeSelf)
             {
@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
     void CheckDeath()
     {
         float deathLevel = -2;
-        if(transform.position.y < deathLevel)
+        if (transform.position.y < deathLevel)
         {
             Respawn();
         }
@@ -60,14 +60,14 @@ public class PlayerManager : MonoBehaviour
         if (transform.position.x > level * distanceBetweenSpawnpoints - 10)
         {
             level++;
-            PlayerPrefs.SetInt("PlayerLevel",level);
+            PlayerPrefs.SetInt("PlayerLevel", level);
             print("Level: " + level);
         }
     }
     public static List<GameObject> pickupList = new List<GameObject>();
     public void ResetLevel()
     {
-        foreach(GameObject g in pickupList)
+        foreach (GameObject g in pickupList)
         {
             print(g.name);
             PlayerPrefs.SetInt(g.name, 1);
@@ -75,8 +75,8 @@ public class PlayerManager : MonoBehaviour
         }
         level = 1;
         PlayerPrefs.SetInt("PlayerLevel", level);
-        PlayerPrefs.SetInt("CubesCollected",0);
-        PlayerPrefs.SetFloat("energy",5f);
+        PlayerPrefs.SetInt("CubesCollected", 0);
+        PlayerPrefs.SetFloat("energy", 5f);
         gameObject.GetComponent<Movement>().SetCountText();
         gameObject.GetComponent<Movement>().OnReset();
         Respawn();
